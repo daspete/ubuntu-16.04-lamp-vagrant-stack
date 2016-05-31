@@ -1,0 +1,10 @@
+VM_NAME: app
+VM_IP: 192.168.0.50
+VM_CPUCOUNT: 2
+VM_MEMORY: 2048
+
+HOST_NAME: app.dev
+
+DB_NAME: application
+DB_USER: application
+DB_PASS: application
