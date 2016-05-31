@@ -9,6 +9,9 @@
 - nvm with preinstalled node v4.2
 - compass
 - composer
+- gulp
+- grunt
+- webpack
 
 ## installation
 
