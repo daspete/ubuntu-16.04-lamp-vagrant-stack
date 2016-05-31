@@ -34,9 +34,6 @@ echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect none" | debconf-se
 apt-get install -y phpmyadmin
 apt-get install -y php-mbstring php-gettext
 
-a2enmod rewrite
-a2enmod headers
-
 sed -i "s/User .*/User vagrant/" /etc/apache2/apache2.conf
 sed -i "s/Group .*/Group vagrant/" /etc/apache2/apache2.conf
 sed -i "s/AllowOverride None/AllowOverride All/g" /etc/apache2/apache2.conf
@@ -56,17 +53,17 @@ cat > /etc/apache2/sites-available/$VMNAME.conf <<EOF
     CustomLog \${APACHE_LOG_DIR}/access.log combined
 
     ServerName $HOSTNAME
-
-    AliasMatch ^/resources(/.*)? /var/www/resources/\$1
-    AliasMatch ^/node_modules(/.*)? /var/www/node_modules/\$1
 </VirtualHost>
 EOF
 
 a2ensite $VMNAME
-service apache2 restart
+a2enmod rewrite
+a2enmod headers
 
-ifconfig
+service apache2 restart
 
 su -c "/vagrant/scripts/postinstall.sh" -s /bin/bash vagrant
 
 mv /home/vagrant/composer.phar /usr/bin/composer
+
+ifconfig
